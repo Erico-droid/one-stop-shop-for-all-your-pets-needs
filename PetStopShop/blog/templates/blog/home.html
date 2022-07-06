@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}             {% comment %} MAIN BLOG PAGE {% endcomment %}
+{% block content %}
+<div class="container">
+  <div class="row">
+{% comment %} <button type="button" class="btn btn-light">Light</button> {% endcomment %}
+    {% for post in posts %}
+    <div class="col-md-4">
+      <article class="media content-section" style = "margin-bottom: 50px">
+          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" width="50" height="50">
+          <div class="media-body">
+            <h4 style="margin-left: 10px; text-decoration: none; text-transform: uppercase"><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h4>
+              <div style="margin-left: 10px" class="article-metadata">
+              <span class="" href="#">post by: {{ post.author }},</span>
+              <small class="text-muted">{{ post.created_on|date:"F d, Y" }}</small>
+              </div>
+              <p style="margin-left: 10px" class="article-content">{{ post.content|truncatechars:30  }}</p>
+          </div>
+      </article>
+      </div>
+    {% endfor %}
+    </div>
+    <div class="text-center" style = "margin: 60px 0px 20px 0px">
+        <a class="btn btn-secondary" href={% url 'post-create' %}>Add New Post</a>
+    </div>
+    </div>
+{% endblock content %}
